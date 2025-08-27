@@ -36,7 +36,7 @@ if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     esac
 
     if [ -z "${INPUT_TEMPLATE}" ]; then
-        INPUT_TEMPLATE=$(printf '<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->')
+        INPUT_TEMPLATE="$(printf '<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->')"
     fi
 fi
 
@@ -129,7 +129,7 @@ update_doc() {
     fi
 
     if [ -n "${INPUT_TEMPLATE}" ]; then
-        exec_args+=(--output-template "${INPUT_TEMPLATE}")
+        exec_args+=("--output-template" "${INPUT_TEMPLATE}")
     fi
 
     if [ "${INPUT_RECURSIVE}" = "true" ]; then
