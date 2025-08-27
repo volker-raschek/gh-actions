@@ -99,7 +99,7 @@ runs:
     INPUT_OUTPUT_FORMAT: ${{ inputs.output-format }}
     INPUT_OUTPUT_METHOD: ${{ inputs.output-method }}
     INPUT_OUTPUT_FILE: ${{ inputs.output-file }}
-    INPUT_TEMPLATE: ${{ inputs.template }}
+    # INPUT_TEMPLATE: ${{ inputs.template }}
     INPUT_ARGS: ${{ inputs.args }}
     INPUT_INDENTION: ${{ inputs.indention }}
     INPUT_GIT_PUSH: ${{ inputs.git-push }}
