@@ -36,7 +36,7 @@ if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     esac
 
     if [ -z "${INPUT_TEMPLATE}" ]; then
-        INPUT_TEMPLATE="$(printf '<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->')"
+        INPUT_TEMPLATE="$(printf '"<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->"')"
     fi
 fi
 
