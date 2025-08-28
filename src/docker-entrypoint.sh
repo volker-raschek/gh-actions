@@ -38,7 +38,9 @@ if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     esac
 
     if [ -z "${INPUT_TEMPLATE}" ]; then
-        INPUT_TEMPLATE="$(printf '"<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->"')"
+        default_template="<!-- BEGIN_TF_DOCS -->\n{{ .Content }}\n<!-- END_TF_DOCS -->"
+        echo "::debug Define default template: ${default_template}"
+        INPUT_TEMPLATE="${default_template}"
     fi
 fi
 
