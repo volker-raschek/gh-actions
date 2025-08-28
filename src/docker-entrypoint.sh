@@ -207,7 +207,7 @@ update_doc() {
 
 # go to github repo
 GITHUB_WORKSPACE="${GITHUB_WORKSPACE:-"$(pwd)"}"
-cd "${GITHUB_WORKSPACE}" || echo "Failed to change directory to ${GITHUB_WORKSPACE}" && exit 1
+cd "${GITHUB_WORKSPACE}"
 
 git_setup
 
