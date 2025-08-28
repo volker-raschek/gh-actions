@@ -29,11 +29,11 @@ cmd_args+=("${extra_args[@]}")
 if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     case "$INPUT_OUTPUT_FORMAT" in
     "asciidoc" | "asciidoc table" | "asciidoc document")
-        cmd_args+=(--indent "${INPUT_INDENTION}")
+        cmd_args+=("--indent" "${INPUT_INDENTION}")
         ;;
 
     "markdown" | "markdown table" | "markdown document")
-        cmd_args+=(--indent "${INPUT_INDENTION}")
+        cmd_args+=("--indent" "${INPUT_INDENTION}")
         ;;
     esac
 
