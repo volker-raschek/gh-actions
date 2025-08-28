@@ -42,13 +42,9 @@ if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     fi
 fi
 
-if [ -z "${INPUT_GIT_PUSH_USER_NAME}" ]; then
-    INPUT_GIT_PUSH_USER_NAME="github-actions[bot]"
-fi
 
-if [ -z "${INPUT_GIT_PUSH_USER_EMAIL}" ]; then
-    INPUT_GIT_PUSH_USER_EMAIL="github-actions[bot]@users.noreply.github.com"
-fi
+INPUT_GIT_PUSH_USER_NAME="${INPUT_GIT_PUSH_USER_NAME:-"github-actions[bot]"}"
+INPUT_GIT_PUSH_USER_EMAIL="${INPUT_GIT_PUSH_USER_EMAIL:-"github-actions[bot]@users.noreply.github.com"}"
 
 if [ -n "${INPUT_GIT_SUB_DIR}" ]; then
     GITHUB_WORKSPACE="${GITHUB_WORKSPACE}/${INPUT_GIT_SUB_DIR}"
