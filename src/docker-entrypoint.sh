@@ -83,9 +83,34 @@ function git_setup() {
     # error. Issue description here: https://github.com/actions/checkout/issues/766
     git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-    git config --global user.name "${INPUT_GIT_PUSH_USER_NAME}"
-    git config --global user.email "${INPUT_GIT_PUSH_USER_EMAIL}"
+    # Check whether Git user information is available. If so, compare it with the
+    # passed information. If they match, do nothing. If they do not match, save
+    # them temporarily, change them to the passed values and restore the
+    # original state when exiting the script.
+    BACKUP_GIT_PUSH_USER_NAME="$(git config --global user.name)"
+    if [ "${BACKUP_GIT_PUSH_USER_NAME}" != "${INPUT_GIT_PUSH_USER_NAME}" ]; then
+        git_config "user.name" "${INPUT_GIT_PUSH_USER_NAME}"
+        trap_add 'git_config "user.name" "${BACKUP_GIT_PUSH_USER_NAME}"' EXIT ERR INT
+    fi
+
+    BACKUP_GIT_PUSH_USER_EMAIL="$(git config --global user.email)"
+    if [ "${BACKUP_GIT_PUSH_USER_EMAIL}" != "${INPUT_GIT_PUSH_USER_EMAIL}" ]; then
+        git_config "user.email" "${INPUT_GIT_PUSH_USER_EMAIL}"
+        trap_add 'git_config "user.email" "${BACKUP_GIT_PUSH_USER_EMAIL}"' EXIT ERR INT
+    fi
+
     git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
+}
+
+function git_config() {
+    local attribute
+    attribute=$1
+
+    local value
+    value=$2
+
+    git config --global "${attribute}" "${value}"
+    echo "::debug ::git config --global '${attribute}' '${value}'"
 }
 
 git_add() {
