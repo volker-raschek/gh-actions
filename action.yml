@@ -89,7 +89,7 @@ outputs:
 
 runs:
   using: docker
-  image: "docker://quay.io/terraform-docs/gh-actions:1.4.1"
+  image: "docker://docker.io/volkerraschek/terraform-docs-action:latest"
   env:
     INPUT_WORKING_DIR: ${{ inputs.working-dir }}
     INPUT_ATLANTIS_FILE: ${{ inputs.atlantis-file }}
@@ -99,7 +99,7 @@ runs:
     INPUT_OUTPUT_FORMAT: ${{ inputs.output-format }}
     INPUT_OUTPUT_METHOD: ${{ inputs.output-method }}
     INPUT_OUTPUT_FILE: ${{ inputs.output-file }}
-    # INPUT_TEMPLATE: ${{ inputs.template }}
+    INPUT_TEMPLATE: ${{ inputs.template }}
     INPUT_ARGS: ${{ inputs.args }}
     INPUT_INDENTION: ${{ inputs.indention }}
     INPUT_GIT_PUSH: ${{ inputs.git-push }}
