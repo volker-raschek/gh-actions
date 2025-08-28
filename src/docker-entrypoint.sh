@@ -30,11 +30,11 @@ if [ "${INPUT_CONFIG_FILE}" == "disabled" ]; then
     case "${INPUT_OUTPUT_FORMAT}" in
     "asciidoc" | "asciidoc table" | "asciidoc document")
         cmd_args+=("--indent" "${INPUT_INDENTION}")
-        ;;
+    ;;
 
     "markdown" | "markdown table" | "markdown document")
         cmd_args+=("--indent" "${INPUT_INDENTION}")
-        ;;
+    ;;
     esac
 
     if [ -z "${INPUT_TEMPLATE}" ]; then
@@ -43,7 +43,6 @@ if [ "${INPUT_CONFIG_FILE}" == "disabled" ]; then
         INPUT_TEMPLATE="${default_template}"
     fi
 fi
-
 
 INPUT_GIT_PUSH_USER_NAME="${INPUT_GIT_PUSH_USER_NAME:-"github-actions[bot]"}"
 INPUT_GIT_PUSH_USER_EMAIL="${INPUT_GIT_PUSH_USER_EMAIL:-"github-actions[bot]@users.noreply.github.com"}"
