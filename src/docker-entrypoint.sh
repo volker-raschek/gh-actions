@@ -49,7 +49,7 @@ INPUT_GIT_PUSH_USER_EMAIL="${INPUT_GIT_PUSH_USER_EMAIL:-"github-actions[bot]@use
 GITHUB_WORKSPACE="${GITHUB_WORKSPACE:-"$(pwd)"}"
 if [ -n "${INPUT_GIT_SUB_DIR}" ]; then
     GITHUB_WORKSPACE="${GITHUB_WORKSPACE}/${INPUT_GIT_SUB_DIR}"
-    echo "Using non-standard GITHUB_WORKSPACE of ${GITHUB_WORKSPACE}"
+    echo "::info Using non-standard GITHUB_WORKSPACE of ${GITHUB_WORKSPACE}"
 fi
 
 
@@ -111,7 +111,7 @@ function git_config() {
     value=$2
 
     git config --global "${attribute}" "${value}"
-    echo "::debug ::git config --global '${attribute}' '${value}'"
+    echo "::debug git config --global '${attribute}' '${value}'"
 }
 
 function git_add() {
