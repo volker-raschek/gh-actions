@@ -46,6 +46,7 @@ fi
 INPUT_GIT_PUSH_USER_NAME="${INPUT_GIT_PUSH_USER_NAME:-"github-actions[bot]"}"
 INPUT_GIT_PUSH_USER_EMAIL="${INPUT_GIT_PUSH_USER_EMAIL:-"github-actions[bot]@users.noreply.github.com"}"
 
+GITHUB_WORKSPACE="${GITHUB_WORKSPACE:-"$(pwd)"}"
 if [ -n "${INPUT_GIT_SUB_DIR}" ]; then
     GITHUB_WORKSPACE="${GITHUB_WORKSPACE}/${INPUT_GIT_SUB_DIR}"
     echo "Using non-standard GITHUB_WORKSPACE of ${GITHUB_WORKSPACE}"
@@ -205,8 +206,7 @@ function update_doc() {
     fi
 }
 
-# go to github repo
-GITHUB_WORKSPACE="${GITHUB_WORKSPACE:-"$(pwd)"}"
+# go to git repository
 cd "${GITHUB_WORKSPACE}"
 
 git_setup
