@@ -18,11 +18,13 @@ set -o errexit
 set -o pipefail
 set -o errtrace
 
-# shellcheck disable=SC2206
-cmd_args=(${INPUT_OUTPUT_FORMAT})
+cmd_args=()
 
-# shellcheck disable=SC2206
-cmd_args+=(${INPUT_ARGS})
+IFS=' ' read -r -a output_format_args <<< "${INPUT_OUTPUT_FORMAT}"
+cmd_args+=("${output_format_args[@]}")
+
+IFS=' ' read -r -a extra_args <<< "${INPUT_ARGS}"
+cmd_args+=("${extra_args[@]}")
 
 if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
     case "$INPUT_OUTPUT_FORMAT" in
