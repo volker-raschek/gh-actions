@@ -78,7 +78,7 @@ function trap_add() {
             eval "extract_trap_cmd $(trap -p "${trap_add_name}")"
             # print the new trap command
             printf '%s\n' "${trap_command}"
-        )" "${trap_add_name}" || echo "ERROR: unable to add to trap ${trap_add_name}"
+        )" "${trap_add_name}" || echo "::error Unable to add to trap ${trap_add_name}"
     done
 }
 
@@ -195,7 +195,7 @@ function update_doc() {
 
     exec_args+=("${working_dir}")
 
-    echo "::debug terraform-docs" "${exec_args[@]}"
+    echo "::info terraform-docs" "${exec_args[@]}"
     if ! terraform-docs "${exec_args[@]}"; then
         exit $?
     fi
