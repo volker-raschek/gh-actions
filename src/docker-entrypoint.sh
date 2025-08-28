@@ -35,6 +35,9 @@ if [ "${INPUT_CONFIG_FILE}" == "disabled" ]; then
     "markdown" | "markdown table" | "markdown document")
         cmd_args+=("--indent" "${INPUT_INDENTION}")
     ;;
+    *)
+        echo "::error No output format defined" 1>&2 && exit 1
+    ;;
     esac
 
     if [ -z "${INPUT_TEMPLATE}" ]; then
