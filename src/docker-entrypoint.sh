@@ -221,10 +221,15 @@ elif [ -n "${INPUT_FIND_DIR}" ] && [ "${INPUT_FIND_DIR}" != "disabled" ]; then
         update_doc "${project_dir}"
     done
 else
+    if [ -z "${INPUT_WORKING_DIR}" ]; then
+        echo "::error working-dir not specified" 1>&2 && exit 1
+    fi
+
     # Split INPUT_WORKING_DIR by commas
     for project_dir in ${INPUT_WORKING_DIR//,/ }; do
         update_doc "${project_dir}"
     done
+
 fi
 
 # always set num_changed output
