@@ -113,7 +113,7 @@ function git_config() {
     echo "::debug ::git config --global '${attribute}' '${value}'"
 }
 
-git_add() {
+function git_add() {
     local file
     file="$1"
     git add "${file}"
@@ -124,11 +124,11 @@ git_add() {
     fi
 }
 
-git_status() {
+function git_status() {
     git status --porcelain | grep -c -E '([MA]\W).+' || true
 }
 
-git_commit() {
+function git_commit() {
     if [ "$(git_status)" -eq 0 ]; then
         echo "::debug No files changed, skipping commit"
         exit 0
@@ -148,7 +148,7 @@ git_commit() {
     git commit "${args[@]}"
 }
 
-update_doc() {
+function update_doc() {
     local working_dir
     working_dir="$1"
     echo "::debug working_dir=${working_dir}"
