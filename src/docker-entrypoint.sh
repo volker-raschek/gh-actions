@@ -51,7 +51,33 @@ if [ -n "${INPUT_GIT_SUB_DIR}" ]; then
     echo "Using non-standard GITHUB_WORKSPACE of ${GITHUB_WORKSPACE}"
 fi
 
-git_setup() {
+
+# trap_add is a function that allows `trap` to be extended with additional function calls. By default, the trap program
+# can only execute or reserve one function per process signal.
+#
+# For example, the following trap_add commands leads to the following trap command:
+#
+#   $ trap_add 'echo "foo"' EXIT ERR SIGINT
+#   $ trap_add 'echo "bar"' EXIT ERR SIGINT
+#   $ trap 'echo "foo"\necho "bar"' EXIT ERR SIGINT
+function trap_add() {
+    local trap_command
+    trap_command="${1}"
+
+    shift 1
+    for trap_add_name in "${@}"; do
+        trap -- "$(
+            # helper function to get existing trap command from output of trap -p
+            extract_trap_cmd() { printf '%s\n' "$3"; }
+            # print existing trap command with newline
+            eval "extract_trap_cmd $(trap -p "${trap_add_name}")"
+            # print the new trap command
+            printf '%s\n' "${trap_command}"
+        )" "${trap_add_name}" || echo "ERROR: unable to add to trap ${trap_add_name}"
+    done
+}
+
+function git_setup() {
     # When the runner maps the $GITHUB_WORKSPACE mount, it is owned by the runner
     # user while the created folders are owned by the container user, causing this
     # error. Issue description here: https://github.com/actions/checkout/issues/766
