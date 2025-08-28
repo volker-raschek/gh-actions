@@ -26,8 +26,8 @@ cmd_args+=("${output_format_args[@]}")
 IFS=' ' read -r -a extra_args <<< "${INPUT_ARGS}"
 cmd_args+=("${extra_args[@]}")
 
-if [ "${INPUT_CONFIG_FILE}" = "disabled" ]; then
-    case "$INPUT_OUTPUT_FORMAT" in
+if [ "${INPUT_CONFIG_FILE}" == "disabled" ]; then
+    case "${INPUT_OUTPUT_FORMAT}" in
     "asciidoc" | "asciidoc table" | "asciidoc document")
         cmd_args+=("--indent" "${INPUT_INDENTION}")
         ;;
