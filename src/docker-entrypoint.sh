@@ -191,14 +191,9 @@ function update_doc() {
 
     exec_args+=("${working_dir}")
 
-    local success
-
     echo "::debug terraform-docs" "${exec_args[@]}"
-    terraform-docs "${exec_args[@]}"
-    success=$?
-
-    if [ $success -ne 0 ]; then
-        exit $success
+    if ! terraform-docs "${exec_args[@]}"; then
+        exit $?
     fi
 
     if [ "${INPUT_OUTPUT_METHOD}" == "inject" ] || [ "${INPUT_OUTPUT_METHOD}" == "replace" ]; then
